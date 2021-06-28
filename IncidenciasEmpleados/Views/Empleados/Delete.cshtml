@@ -1,0 +1,40 @@
+﻿@model IncidenciasEmpleados.Entities.EmpleadoDTO
+
+@{
+    ViewBag.Title = "Eliminar empleado";
+}
+
+<h2>Eliminar empleado</h2>
+
+<h3>¿Esta seguro que desea eliminar este empleado?</h3>
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al listado", "Index")
+        </div>
+    }
+</div>

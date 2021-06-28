@@ -1,0 +1,48 @@
+﻿@model IncidenciasEmpleados.Entities.IncidenciaDTO
+
+@{
+    ViewBag.Title = "Eliminar incidencia";
+}
+
+<h2>Eliminar incidencia</h2>
+
+<h3>¿Esta seguro que desea eliminar esta incidencia?</h3>
+<div>
+    <h4>Incidencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpleadoName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpleadoName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDisplay)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Volver al listado", "Index")
+        </div>
+    }
+</div>

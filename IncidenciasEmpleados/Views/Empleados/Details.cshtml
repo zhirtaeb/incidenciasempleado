@@ -1,0 +1,68 @@
+﻿@model IncidenciasEmpleados.Entities.EmpleadoDTO
+
+
+@{
+    ViewBag.Title = "Detalle empleado";
+}
+
+<h2>Detalle empleado</h2>
+
+<div>
+    <h4>Empleado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpresaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpresaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Listado de incidencias
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                </tr>
+                @foreach (var item in ViewBag.IncidenciaList as List<IncidenciasEmpleados.Entities.IncidenciaDTO>)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Fecha.ToShortDateString()
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver al listado", "Index")
+</p>

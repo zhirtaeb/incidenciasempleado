@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="IncidenciasDM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="IncidenciasDMTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="IncidenciasDM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="IncidenciasDMContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EmpleadoSet" EntityType="IncidenciasDM.Empleado" />
+          <EntitySet Name="EmpresaSet" EntityType="IncidenciasDM.Empresa" />
+          <AssociationSet Name="EmpleadoEmpresa" Association="IncidenciasDM.EmpleadoEmpresa">
+            <End Role="Empleado" EntitySet="EmpleadoSet" />
+            <End Role="Empresa" EntitySet="EmpresaSet" />
+          </AssociationSet>
+          <EntitySet Name="TareaSet" EntityType="IncidenciasDM.Tarea" />
+          <EntitySet Name="IncidenciaSet" EntityType="IncidenciasDM.Incidencia" />
+          <AssociationSet Name="EmpleadoTarea" Association="IncidenciasDM.EmpleadoTarea">
+            <End Role="Empleado" EntitySet="EmpleadoSet" />
+            <End Role="Tarea" EntitySet="TareaSet" />
+          </AssociationSet>
+          <AssociationSet Name="EmpleadoIncidencia" Association="IncidenciasDM.EmpleadoIncidencia">
+            <End Role="Empleado" EntitySet="EmpleadoSet" />
+            <End Role="Incidencia" EntitySet="IncidenciaSet" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Empresa" Relationship="IncidenciasDM.EmpleadoEmpresa" FromRole="Empleado" ToRole="Empresa" />
+          <NavigationProperty Name="Tarea" Relationship="IncidenciasDM.EmpleadoTarea" FromRole="Empleado" ToRole="Tarea" />
+          <NavigationProperty Name="Incidencia" Relationship="IncidenciasDM.EmpleadoIncidencia" FromRole="Empleado" ToRole="Incidencia" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="IncidenciasDM.EmpleadoEmpresa" FromRole="Empresa" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="EmpleadoEmpresa">
+          <End Type="IncidenciasDM.Empleado" Role="Empleado" Multiplicity="*" />
+          <End Type="IncidenciasDM.Empresa" Role="Empresa" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="String" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="IncidenciasDM.EmpleadoTarea" FromRole="Tarea" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Incidencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="String" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="IncidenciasDM.EmpleadoIncidencia" FromRole="Incidencia" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="EmpleadoTarea">
+          <End Type="IncidenciasDM.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="IncidenciasDM.Tarea" Role="Tarea" Multiplicity="*" />
+        </Association>
+        <Association Name="EmpleadoIncidencia">
+          <End Type="IncidenciasDM.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="IncidenciasDM.Incidencia" Role="Incidencia" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="IncidenciasDM" />
+        <Alias Key="Target" Value="IncidenciasDM.Store" />
+        <EntityContainerMapping CdmEntityContainer="IncidenciasDMContainer" StorageEntityContainer="IncidenciasDMTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
